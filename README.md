@@ -127,7 +127,7 @@ Open the SQL Analytics Endpoint of lh_credit_risk
 → Create a New Semantic Model using Direct Lake on OneLake over gold_loan_scores.
 Open the Power BI report editor, write the core DAX measures (Formatting in ₹ Cr and %), and build the report layout.
 Create a Data Pipeline linking all 4 notebooks sequentially (01_Bronze 
-→
+→"Early Warning Surveillance.png"
 → 02_Silver 
 →
 → 03_Gold 
