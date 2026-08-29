@@ -96,8 +96,7 @@ Page 1 (Executive Risk Summary): Highlights gross portfolio default rates, credi
 Page 2 (Branch Recovery Matrix): Delivers a red/yellow/green color-coded field action table for branch managers to identify high-probability default accounts.
 📷 Screenshots & Execution Receipts
 1. Executive Credit Risk Dashboard (Page 1)
-Executive Overview
-
+<img width="1008" height="574" alt="Image" src="https://github.com/user-attachments/assets/6da0bac1-2ebc-4ab5-bd85-27a6b828f781" />
 2. Branch Recovery Action Matrix (Page 2)
 Branch Recovery Matrix
 
@@ -127,8 +126,7 @@ Open the SQL Analytics Endpoint of lh_credit_risk
 → Create a New Semantic Model using Direct Lake on OneLake over gold_loan_scores.
 Open the Power BI report editor, write the core DAX measures (Formatting in ₹ Cr and %), and build the report layout.
 Create a Data Pipeline linking all 4 notebooks sequentially (01_Bronze 
-→<!-- Uploading "Early Warning Surveillance.png"... -->
-→ 02_Silver 
+<img width="1008" height="574" alt="Image" src="https://github.com/user-attachments/assets/6da0bac1-2ebc-4ab5-bd85-27a6b828f781" />→ 02_Silver 
 →
 → 03_Gold 
 →
