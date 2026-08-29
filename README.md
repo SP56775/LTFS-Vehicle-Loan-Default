@@ -1,4 +1,4 @@
-# 🇮🇳 LTFS Vehicle Loan Default Prediction & Early Warning Engine
+# LTFS Vehicle Loan Default Prediction & Early Warning Engine
 > **End-to-End Financial Data Engineering, PySpark Machine Learning & Direct Lake BI Solution built on Microsoft Fabric.**
 
 ## 📌 Business Context & Problem
