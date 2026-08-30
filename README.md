@@ -1,10 +1,5 @@
 # LTFS Vehicle Loan Default Prediction & Early Warning Engine
 
-[![Microsoft Fabric](https://img.shields.io/badge/Platform-Microsoft%20Fabric-blue?logo=microsoft)](https://fabric.microsoft.com/)
-[![PySpark](https://img.shields.io/badge/Engine-PySpark%203.4-orange?logo=apachespark)](https://spark.apache.org/)
-[![Power BI](https://img.shields.io/badge/Reporting-Direct%20Lake%20Mode-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
-[![Architecture](https://img.shields.io/badge/Architecture-Medallion%20(Delta%20Lake)-green)](https://delta.io/)
-
 > An end-to-end Enterprise Financial Data Engineering, PySpark Machine Learning, and Power BI Direct Lake solution built on **Microsoft Fabric** to predict loan default risks across a **₹1,267+ Crore vehicle loan portfolio**.
 
 ---
@@ -53,15 +48,20 @@ This project ingests **233,154 real-world Indian vehicle loan accounts**, cleans
                                 │ Fabric Data Pipeline │
                                 └──────────────────────┘
 
-Bronze Ingestion: Land raw 41-column CSV data into immutable Delta tables with system lineage timestamps.
-Silver Transformation: Clean headers, parse loan age strings (2yrs 3mon → total months), standardize dates, handle nulls, and create CIBIL/LTV risk buckets.
-Gold Feature Engineering: Build a multi-dimensional analytical feature store combining borrower demographics, credit bureau histories, and collateral metrics.
-PySpark ML Scoring: Train a Random Forest model on 80% data split, evaluate on 20% test data, and score default probabilities (0–100%) for all accounts.
-Direct Lake BI: Connect Power BI natively using Direct Lake on OneLake over gold_loan_scores to achieve sub-second query performance over 233,000+ rows without data duplication.
-Pipeline Automation: Orchestrate the 4 sequential notebook execution steps via a Fabric Data Pipeline.
-📁 Repository Structure
-text
+## 🏗️ End-to-End Process Flow
 
+1. **Bronze Ingestion:** Land raw 41-column CSV data into immutable Delta tables with system lineage timestamps.
+2. **Silver Transformation:** Clean headers, parse loan age strings (`2yrs 3mon` → total months), standardize dates, handle nulls, and create CIBIL/LTV risk buckets.
+3. **Gold Feature Engineering:** Build a multi-dimensional analytical feature store combining borrower demographics, credit bureau histories, and collateral metrics.
+4. **PySpark ML Scoring:** Train a Random Forest model on 80% data split, evaluate on 20% test data, and score default probabilities (0–100%) for all accounts.
+5. **Direct Lake BI:** Connect Power BI natively using **Direct Lake on OneLake** over `gold_loan_scores` to achieve sub-second query performance over 233,000+ rows without data duplication.
+6. **Pipeline Automation:** Orchestrate the 4 sequential notebook execution steps via a **Fabric Data Pipeline**.
+
+---
+
+## 📁 Repository Structure
+
+```text
 LTFS-Vehicle-Loan-Default-Fabric/
 │
 ├── notebooks/
@@ -77,58 +77,53 @@ LTFS-Vehicle-Loan-Default-Fabric/
 │   └── auc_roc_evaluation_score.png     # PySpark AUC-ROC Evaluation Score & Feature Importance output
 │
 └── README.md                            # Comprehensive Project Documentation
-🛠️ Step-by-Step Implementation Breakdown
-1. Data Processing & Feature Engineering (PySpark)
-Loan Duration Normalization: Written a PySpark UDF to parse strings like '2yrs 3mon' or '5yrs 11mon' into total months (avg_acct_age_months & credit_history_months).
-CIBIL Score Bucketing: Segmented numeric scores into 5 standardized categories: No History (NTC), Very Poor (300-549), Poor (550-649), Fair/Good (650-749), and Excellent (750+).
-KYC Strength Index: Computed a combined identity verification score (0 to 5) summing flags across Aadhaar, PAN, Voter ID, Driving License, and Passport.
-Collateral LTV Risk: Segmented Loan-To-Value percentages into High LTV (≥ 85%), Medium LTV (70-85%), and Safe LTV (< 70%).
-2. Machine Learning Model (PySpark MLlib)
-Pipeline Assembly: Implemented StringIndexer for categorical variables (employment_type, ltv_band, cibil_band) and packaged features using VectorAssembler.
-Classifier: Trained a RandomForestClassifier (numTrees=100, maxDepth=10, seed=42).
-Evaluation: Model evaluated using BinaryClassificationEvaluator achieving an AUC-ROC of 0.6307.
-Risk Tiering: Extracted probability vector arrays to assign operational risk tiers:
-🔴 High Risk: Default Probability ≥ 65%
-🟡 Medium Risk: Default Probability 35% – 64.9%
-🟢 Low Risk: Default Probability < 35%
-3. Business Intelligence (Power BI Direct Lake)
-Storage Engine: Connected natively using Direct Lake on OneLake over gold_loan_scores.
-DAX Metrics: Written financial DAX measures dividing raw currency sums by 10,000,000 to format values in Indian Crores (₹ Cr).
-Page 1 (Portfolio Risk Analytics): Highlights gross portfolio default rates, credit score default curves, collateral LTV distributions, and regional risk maps.
-Page 2 (Early Warning Surveillance): Delivers a red/yellow/green color-coded field action table for branch managers to identify high-probability default accounts.
-📷 Screenshots & Execution Receipts
-1. Portfolio Risk Analytics (Page 1)
-Portfolio Risk Analytics
-<p align="center">
-  <img src=".LTFS-Vehicle-Loan-Default/screenshots/Early%20Warning%20Surveillance.png" width="100%" alt="Early Warning Surveillance">
-</p>
-2. Early Warning Surveillance (Page 2)
-Early Warning Surveillance
-<img width="1008" height="574" alt="Early Warning Surveillance" src="https://github.com/user-attachments/assets/7808d875-4829-42ee-a0b9-4583e3851840" />
+```
 
-3. Fabric Data Pipeline Orchestration
-Fabric Data Pipeline Orchestration
-<img width="1278" height="564" alt="pl_npa_daily_orchestration" src="https://github.com/user-attachments/assets/0962f373-9988-4d96-b456-cd62c1ede2d7" />
+---
 
-4. AUC-ROC Evaluation Score & Feature Importance
-AUC-ROC Evaluation Score
-<img width="964" height="213" alt="AUC-ROC evaluation score" src="https://github.com/user-attachments/assets/14f891b9-540f-4207-9267-82b6ed688e84" />
+## 🛠️ Step-by-Step Implementation Breakdown
 
-🎯 Operational Business Impact
-Precision Field Collections: Instead of scattering recovery agents randomly across 233,000 borrowers, branch managers can filter Page 2 for 455 High-Risk accounts holding ₹55 Lakhs of capital, visiting them prior to the EMI due date.
-Dynamic Underwriting Policy Adjustment: Dashboard insights reveal that over 27,000 borrowers are New-to-Credit (NTC), driving the highest default rates. The risk committee can instantly mandate a minimum 25% down payment (75% max LTV) for all future NTC applicants.
-RBI Provisioning Compliance: The CFO gets an exact risk-weighted breakdown across Low, Medium, and High risk tiers to reserve capital required under Reserve Bank of India (RBI) guidelines.
-⚙️ How to Replicate This Project
-Prerequisites:
+### 1. Data Processing & Feature Engineering (PySpark)
+* **Loan Duration Normalization:** Written a PySpark UDF to parse strings like `'2yrs 3mon'` or `'5yrs 11mon'` into total months (`avg_acct_age_months` & `credit_history_months`).
+* **CIBIL Score Bucketing:** Segmented numeric scores into 5 standardized categories: *No History (NTC)*, *Very Poor (300-549)*, *Poor (550-649)*, *Fair/Good (650-749)*, and *Excellent (750+)*.
+* **KYC Strength Index:** Computed a combined identity verification score (`0 to 5`) summing flags across Aadhaar, PAN, Voter ID, Driving License, and Passport.
+* **Collateral LTV Risk:** Segmented Loan-To-Value percentages into *High LTV (≥ 85%)*, *Medium LTV (70-85%)*, and *Safe LTV (< 70%)*.
 
-An active Microsoft Fabric Workspace (Trial or Capacity).
-Dataset: LTFS Vehicle Loan Default Prediction Dataset (train.csv).
-Setup Steps:
+### 2. Machine Learning Model (PySpark MLlib)
+* **Pipeline Assembly:** Implemented `StringIndexer` for categorical variables (`employment_type`, `ltv_band`, `cibil_band`) and packaged features using `VectorAssembler`.
+* **Classifier:** Trained a `RandomForestClassifier` (`numTrees=100`, `maxDepth=10`, `seed=42`).
+* **Evaluation:** Model evaluated using `BinaryClassificationEvaluator` achieving an **AUC-ROC of 0.6307**.
+* **Risk Tiering:** Extracted probability vector arrays to assign operational risk tiers:
+  * 🔴 **High Risk:** Default Probability ≥ 65%
+  * 🟡 **Medium Risk:** Default Probability 35% – 64.9%
+  * 🟢 **Low Risk:** Default Probability < 35%
 
-Create a Fabric Lakehouse named lh_credit_risk.
-Upload train.csv into Files/raw/.
-Import notebooks from the /notebooks folder into your workspace in order (01 to 04).
-Run Notebook 01 through 04 sequentially.
-Open the SQL Analytics Endpoint of lh_credit_risk → Create a New Semantic Model using Direct Lake on OneLake over gold_loan_scores.
-Open the Power BI report editor, write the core DAX measures (Formatting in ₹ Cr and %), and build the report layout.
-Create a Data Pipeline (pl_npa_daily_orchestration) linking all 4 notebooks sequentially (01_Bronze → 02_Silver → 03_Gold → 04_ML).
+### 3. Business Intelligence (Power BI Direct Lake)
+* **Storage Engine:** Connected natively using **Direct Lake on OneLake** over `gold_loan_scores`.
+* **DAX Metrics:** Written financial DAX measures dividing raw currency sums by `10,000,000` to format values in Indian Crores (`₹ Cr`).
+
+---
+
+## 🎯 Operational Business Impact
+
+1. **Precision Field Collections:** Instead of scattering recovery agents randomly across 233,000 borrowers, branch managers can filter Page 2 for **455 High-Risk accounts holding ₹55 Lakhs of capital**, visiting them prior to the EMI due date.
+2. **Dynamic Underwriting Policy Adjustment:** Dashboard insights reveal that **over 27,000 borrowers are New-to-Credit (NTC)**, driving the highest default rates. The risk committee can instantly mandate a minimum 25% down payment (75% max LTV) for all future NTC applicants.
+3. **RBI Provisioning Compliance:** The CFO gets an exact risk-weighted breakdown across Low, Medium, and High risk tiers to reserve capital required under Reserve Bank of India (RBI) guidelines.
+
+---
+
+## ⚙️ How to Replicate This Project
+
+### 1. Prerequisites
+* An active **Microsoft Fabric Workspace** (Trial or Capacity).
+* Dataset: LTFS Vehicle Loan Default Prediction Dataset (`train.csv`).
+
+### 2. Setup Steps
+1. Create a Fabric Lakehouse named `lh_credit_risk`.
+2. Upload `train.csv` into `Files/raw/`.
+3. Import notebooks from the `/notebooks` folder into your workspace in order (`01` to `04`).
+4. Run Notebook `01` through `04` sequentially.
+5. Open the **SQL Analytics Endpoint** of `lh_credit_risk` → Create a **New Semantic Model** using **Direct Lake on OneLake** over `gold_loan_scores`.
+6. Open the Power BI report editor, write the core DAX measures (Formatting in `₹ Cr` and `%`), and build the report layout.
+7. Create a **Data Pipeline** (`pl_npa_daily_orchestration`) linking all 4 notebooks sequentially (`01_Bronze` → `02_Silver` → `03_Gold` → `04_ML`).
+````
