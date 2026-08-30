@@ -96,7 +96,7 @@ Page 1 (Executive Risk Summary): Highlights gross portfolio default rates, credi
 Page 2 (Branch Recovery Matrix): Delivers a red/yellow/green color-coded field action table for branch managers to identify high-probability default accounts.
 📷 Screenshots & Execution Receipts
 1. Executive Credit Risk Dashboard (Page 1)
-<img width="1008" height="574" alt="Image" src="https://github.com/user-attachments/assets/6da0bac1-2ebc-4ab5-bd85-27a6b828f781" />
+<img width="1008" height="574" alt="Early Warning Surveillance" src="https://github.com/user-attachments/assets/02e4cc70-32b6-478b-86ef-3f1cbb68b2cb" />
 2. Branch Recovery Action Matrix (Page 2)
 Branch Recovery Matrix
 
