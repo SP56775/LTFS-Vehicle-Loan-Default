@@ -99,7 +99,9 @@ Page 2 (Early Warning Surveillance): Delivers a red/yellow/green color-coded fie
 📷 Screenshots & Execution Receipts
 1. Portfolio Risk Analytics (Page 1)
 Portfolio Risk Analytics
-<img width="1008" height="574" alt="Portfolio Risk Analytics" src="https://github.com/user-attachments/assets/5d5c6dde-a7b2-4a65-86b4-832c4493b5d1" />
+<p align="center">
+  <img src=".LTFS-Vehicle-Loan-Default/screenshots/Early%20Warning%20Surveillance.png" width="100%" alt="Early Warning Surveillance">
+</p>
 2. Early Warning Surveillance (Page 2)
 Early Warning Surveillance
 <img width="1008" height="574" alt="Early Warning Surveillance" src="https://github.com/user-attachments/assets/7808d875-4829-42ee-a0b9-4583e3851840" />
