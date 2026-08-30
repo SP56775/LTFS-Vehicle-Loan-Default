@@ -99,15 +99,19 @@ Page 2 (Early Warning Surveillance): Delivers a red/yellow/green color-coded fie
 📷 Screenshots & Execution Receipts
 1. Portfolio Risk Analytics (Page 1)
 Portfolio Risk Analytics
+<img width="1008" height="574" alt="Portfolio Risk Analytics" src="https://github.com/user-attachments/assets/7281daf8-01e8-4efa-ae13-6e10861aa6e5" />
 
 2. Early Warning Surveillance (Page 2)
 Early Warning Surveillance
+<img width="1008" height="574" alt="Early Warning Surveillance" src="https://github.com/user-attachments/assets/7808d875-4829-42ee-a0b9-4583e3851840" />
 
 3. Fabric Data Pipeline Orchestration
 Fabric Data Pipeline Orchestration
+<img width="1278" height="564" alt="pl_npa_daily_orchestration" src="https://github.com/user-attachments/assets/0962f373-9988-4d96-b456-cd62c1ede2d7" />
 
 4. AUC-ROC Evaluation Score & Feature Importance
 AUC-ROC Evaluation Score
+<img width="964" height="213" alt="AUC-ROC evaluation score" src="https://github.com/user-attachments/assets/14f891b9-540f-4207-9267-82b6ed688e84" />
 
 🎯 Operational Business Impact
 Precision Field Collections: Instead of scattering recovery agents randomly across 233,000 borrowers, branch managers can filter Page 2 for 455 High-Risk accounts holding ₹55 Lakhs of capital, visiting them prior to the EMI due date.
